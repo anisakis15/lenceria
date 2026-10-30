@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dalia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Si tienes los archivos de Adelon, descomenta y ajusta la ruta
+    @font-face {
+      font-family: "Adelon";
+      src: url("/fonts/Adelon.woff2") format("woff2");
+      font-display: swap;
+    }
+    */
+    </style>
+
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              menu: ['"Adelon"', '"Geist Mono"', "ui-monospace", "monospace"],
+            },
+            keyframes: {
+              drop: {
+                "0%": { transform: "translateY(-48%)" },
+                "100%": { transform: "translateY(0)" },
+              },
+            },
+            animation: {
+              drop: "drop 0.9s cubic-bezier(.2,.8,.2,1) both",
+            },
+          },
+        },
+        plugins: [
+          function ({ addVariant }) {
+            addVariant(
+              "hover-device",
+              "@media (hover: hover) and (pointer: fine)",
+            );
+            addVariant(
+              "touch-device",
+              "@media not all and (hover: hover) and (pointer: fine)",
+            );
+          },
+        ],
+      };
+    </script>
+  </head>
+
+  <body class="bg-white font-menu text-black">
+    <!-- Altura fija = viewport. Header: altura natural. Footer: el espacio restante. -->
+    <div class="flex h-svh flex-col overflow-hidden">
+      <!-- MENÚ -->
+      <header class="shrink-0">
+        <nav aria-label="Menú principal">
+          <ul class="grid grid-cols-4">
+            <!-- INFO -->
+            <li>
+              <a href="#info" class="group block overflow-hidden outline-none">
+                <div
+                  class="flex flex-col items-center transition-transform duration-500 ease-out motion-reduce:transition-none motion-reduce:animate-none touch-device:animate-drop hover-device:-translate-y-[48%] hover-device:group-hover:translate-y-0 hover-device:group-focus-visible:translate-y-0"
+                  style="animation-delay: 500ms"
+                >
+                  <img
+                    src="https://ik.imagekit.io/anisa15/black.png"
+                    alt=""
+                    class="block h-[min(57vw,34svh)] md:h-[min(33vw,44svh)] w-auto max-w-full object-contain"
+                    draggable="false"
+                  />
+                  <span
+                    class="mt-[1.5svh] text-[3.2vw] md:text-[clamp(13px,1.1vw,18px)] leading-none whitespace-nowrap transition-opacity duration-500 motion-reduce:transition-none hover-device:opacity-0 hover-device:group-hover:opacity-100 hover-device:group-focus-visible:opacity-100 group-focus-visible:underline"
+                    >Info</span
+                  >
+                </div>
+              </a>
+            </li>
+
+            <!-- MEDIAS -->
+            <li>
+              <a
+                href="#medias"
+                class="group block overflow-hidden outline-none"
+              >
+                <div
+                  class="flex flex-col items-center transition-transform duration-500 ease-out motion-reduce:transition-none motion-reduce:animate-none touch-device:animate-drop hover-device:-translate-y-[48%] hover-device:group-hover:translate-y-0 hover-device:group-focus-visible:translate-y-0"
+                  style="animation-delay: 650ms"
+                >
+                  <img
+                    src="https://ik.imagekit.io/anisa15/blue_Px9BT2qnz.png"
+                    alt=""
+                    class="block h-[min(57vw,34svh)] md:h-[min(33vw,44svh)] w-auto max-w-full object-contain"
+                    draggable="false"
+                  />
+                  <span
+                    class="mt-[1.5svh] text-[3.2vw] md:text-[clamp(13px,1.1vw,18px)] leading-none whitespace-nowrap transition-opacity duration-500 motion-reduce:transition-none hover-device:opacity-0 hover-device:group-hover:opacity-100 hover-device:group-focus-visible:opacity-100 group-focus-visible:underline"
+                    >Medias</span
+                  >
+                </div>
+              </a>
+            </li>
+
+            <!-- SUJETADORES -->
+            <li>
+              <a
+                href="#sujetadores"
+                class="group block overflow-hidden outline-none"
+              >
+                <div
+                  class="flex flex-col items-center transition-transform duration-500 ease-out motion-reduce:transition-none motion-reduce:animate-none touch-device:animate-drop hover-device:-translate-y-[48%] hover-device:group-hover:translate-y-0 hover-device:group-focus-visible:translate-y-0"
+                  style="animation-delay: 800ms"
+                >
+                  <img
+                    src="https://ik.imagekit.io/anisa15/two.png"
+                    alt=""
+                    class="block h-[min(57vw,34svh)] md:h-[min(33vw,44svh)] w-auto max-w-full object-contain"
+                    draggable="false"
+                  />
+                  <span
+                    class="mt-[1.5svh] text-[3.2vw] md:text-[clamp(13px,1.1vw,18px)] leading-none whitespace-nowrap transition-opacity duration-500 motion-reduce:transition-none hover-device:opacity-0 hover-device:group-hover:opacity-100 hover-device:group-focus-visible:opacity-100 group-focus-visible:underline"
+                    >Sujetadores</span
+                  >
+                </div>
+              </a>
+            </li>
+
+            <!-- CONTACTO -->
+            <li>
+              <a
+                href="#contacto"
+                class="group block overflow-hidden outline-none"
+              >
+                <div
+                  class="flex flex-col items-center transition-transform duration-500 ease-out motion-reduce:transition-none motion-reduce:animate-none touch-device:animate-drop hover-device:-translate-y-[48%] hover-device:group-hover:translate-y-0 hover-device:group-focus-visible:translate-y-0"
+                  style="animation-delay: 950ms"
+                >
+                  <img
+                    src="https://ik.imagekit.io/anisa15/white.png"
+                    alt=""
+                    class="block h-[min(57vw,34svh)] md:h-[min(33vw,44svh)] w-auto max-w-full object-contain"
+                    draggable="false"
+                  />
+                  <span
+                    class="mt-[1.5svh] text-[3.2vw] md:text-[clamp(13px,1.1vw,18px)] leading-none whitespace-nowrap transition-opacity duration-500 motion-reduce:transition-none hover-device:opacity-0 hover-device:group-hover:opacity-100 hover-device:group-focus-visible:opacity-100 group-focus-visible:underline"
+                    >Contacto</span
+                  >
+                </div>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- LOGO: ocupa solo el espacio que queda y se ajusta sin salirse -->
+      <footer class="min-h-0 flex-1 px-3 pb-3 pt-[3svh] md:px-4 md:pb-4">
+        <a href="/" aria-label="Dalia, inicio" class="block h-full w-full">
+          <img
+            src="https://ik.imagekit.io/anisa15/DALIA.png"
+            alt="Dalia"
+            class="block h-full w-full object-contain object-bottom"
+            draggable="false"
+          />
+        </a>
+      </footer>
+    </div>
+  </body>
+</html>
