@@ -210,10 +210,22 @@
           transform: translateY(-24%);
         }
       }
+      /* Táctil */
       @media not all and (hover: hover) and (pointer: fine) {
+        /* Index: caen todas al cargar */
         .tight-in {
           animation: drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
           animation-delay: var(--d);
+        }
+
+        /* Subpáginas: empiezan todas abajo y se recogen las que no son la actual */
+        body.menu-sub .tight-in {
+          animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation-delay: calc(var(--d) - 300ms);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          animation: none;
+          transform: translateY(-24%);
         }
       }
       @keyframes drop {
@@ -224,16 +236,27 @@
           transform: translateY(-24%);
         }
       }
+      @keyframes rise {
+        from {
+          transform: translateY(-24%);
+        }
+        to {
+          transform: translateY(-48%);
+        }
+      }
       @media (prefers-reduced-motion: reduce) {
-        .tight-in {
+        body.menu-sub .tight-in {
           animation: none;
-          transition: none;
+          transform: translateY(-48%);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          transform: translateY(-24%);
         }
       }
     </style>
   </head>
 
-  <body class="overflow-x-hidden bg-white font-mono text-black">
+  <body class="menu-sub overflow-x-hidden bg-white font-mono text-black">
     <!-- ============ MENÚ FIJO ============ -->
     <header
       id="site-header"
@@ -432,7 +455,7 @@
                   <img
                     class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
                     alt="Sujetador vintage azul con encaje"
-                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__34308.png"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__35152.png"
                   />
                 </li>
               </ul>
