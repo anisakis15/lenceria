@@ -145,8 +145,24 @@
         content: " +";
         font-family: "Geist Mono", monospace;
       }
-      details[open] summary::after {
+      details.is-open summary::after {
         content: " –";
+      }
+      details[open] .txt {
+        animation: faq-in 0.35s ease-in-out both;
+      }
+      @keyframes faq-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        details[open] .txt {
+          animation: none;
+        }
       }
       details .txt {
         margin-top: 2svh;
@@ -652,6 +668,52 @@
       new Splide("#slideshow-1", { ...base, interval: 2000 }).mount(); // antes 3500
       new Splide("#slideshow-2", { ...base, interval: 2000 }).mount(); // antes 4600
       new Splide("#slideshow-3", { ...base, interval: 2000 }).mount(); // antes 5300
+    </script>
+    <script>
+      // Animación de las preguntas frecuentes (altura con ease-in-out)
+      const reduceMotion = matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      document.querySelectorAll("details").forEach((el) => {
+        const summary = el.querySelector("summary");
+        let isOpen = el.open;
+        let anim = null;
+
+        summary.addEventListener("click", (e) => {
+          e.preventDefault();
+          isOpen = !isOpen;
+          el.classList.toggle("is-open", isOpen);
+
+          // Sin animación si la persona prefiere menos movimiento
+          if (reduceMotion) {
+            el.open = isOpen;
+            return;
+          }
+
+          // Altura actual (también vale si se pulsa a mitad de animación)
+          const start = el.offsetHeight;
+          if (anim) anim.cancel();
+
+          // Mide la altura abierta y la cerrada
+          el.open = true;
+          const openH = el.offsetHeight;
+          el.open = false;
+          const closedH = el.offsetHeight;
+          el.open = true;
+
+          el.style.overflow = "hidden";
+          anim = el.animate(
+            { height: [start + "px", (isOpen ? openH : closedH) + "px"] },
+            { duration: 350, easing: "ease-in-out" },
+          );
+          anim.onfinish = () => {
+            el.open = isOpen;
+            el.style.overflow = "";
+            anim = null;
+          };
+        });
+      });
     </script>
     <script>
       // Mide menú y logo para centrar cada bloque entre ambos
