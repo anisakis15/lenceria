@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medias · Dalia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              menu: ['"Adelon"', "Georgia", "serif"], // menú y títulos
+              mono: ['"Geist Mono"', "ui-monospace", "monospace"], // textos
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Si tienes los archivos de Adelon, descomenta y ajusta la ruta
+    @font-face { font-family: "Adelon"; src: url("/fonts/Adelon.woff2") format("woff2"); font-display: swap; }
+    */
+      html {
+        background: #fff;
+      }
+
+      /* ---------- MENÚ (igual que info.html) ---------- */
+      .tight-in {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .tight-img {
+        display: block;
+        height: min(57vw, 34svh);
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+      }
+      .tight-label {
+        margin-top: 1.5svh;
+        font-size: 3.2vw;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .tight-link:focus-visible .tight-label {
+        text-decoration: underline;
+      }
+      @media (min-width: 768px) {
+        .tight-img {
+          height: min(33vw, 44svh);
+        }
+        .tight-label {
+          font-size: clamp(13px, 1.1vw, 18px);
+        }
+      }
+      /* Ratón: medias recogidas; bajan con hover, foco o si es la página actual */
+      @media (hover: hover) and (pointer: fine) {
+        .tight-in {
+          transform: translateY(-48%);
+        }
+        a.tight-link {
+          pointer-events: none;
+        }
+        .tight-img,
+        .tight-label {
+          pointer-events: auto;
+        }
+        .tight-link:hover .tight-in,
+        .tight-link:focus-visible .tight-in,
+        .tight-link[aria-current="page"] .tight-in {
+          transform: translateY(-24%);
+        }
+      }
+      /* Táctil: empiezan todas abajo (como al salir del index) y se recogen
+   las que no son la página actual */
+      @media not all and (hover: hover) and (pointer: fine) {
+        .tight-in {
+          animation: drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation-delay: var(--d);
+        }
+        body.menu-sub .tight-in {
+          animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation-delay: calc(var(--d) - 350ms);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          animation: none;
+          transform: translateY(-24%);
+        }
+      }
+      @keyframes drop {
+        from {
+          transform: translateY(-48%);
+        }
+        to {
+          transform: translateY(-24%);
+        }
+      }
+      @keyframes rise {
+        from {
+          transform: translateY(-24%);
+        }
+        to {
+          transform: translateY(-48%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        body.menu-sub .tight-in {
+          animation: none;
+          transform: translateY(-48%);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          transform: translateY(-24%);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="menu-sub overflow-x-hidden bg-white font-mono text-black">
+    <!-- ============ MENÚ FIJO (por encima del contenido) ============ -->
+    <header
+      id="site-header"
+      class="pointer-events-none fixed inset-x-0 top-0 z-20 font-menu"
+    >
+      <nav aria-label="Menú principal">
+        <ul class="grid grid-cols-4">
+          <li>
+            <a
+              href="info.html"
+              class="tight-link pointer-events-auto block overflow-hidden outline-none"
+            >
+              <div class="tight-in" style="--d: 500ms">
+                <img
+                  class="tight-img"
+                  src="https://ik.imagekit.io/anisa15/black.png"
+                  alt=""
+                  draggable="false"
+                />
+                <span class="tight-label">Info</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="medias.html"
+              aria-current="page"
+              class="tight-link pointer-events-auto block overflow-hidden outline-none"
+            >
+              <div class="tight-in" style="--d: 650ms">
+                <img
+                  class="tight-img"
+                  src="https://ik.imagekit.io/anisa15/blue_Px9BT2qnz.png"
+                  alt=""
+                  draggable="false"
+                />
+                <span class="tight-label">Medias</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="sujetadores.html"
+              class="tight-link pointer-events-auto block overflow-hidden outline-none"
+            >
+              <div class="tight-in" style="--d: 800ms">
+                <img
+                  class="tight-img"
+                  src="https://ik.imagekit.io/anisa15/two.png"
+                  alt=""
+                  draggable="false"
+                />
+                <span class="tight-label">Sujetadores</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="contacto.html"
+              class="tight-link pointer-events-auto block overflow-hidden outline-none"
+            >
+              <div class="tight-in" style="--d: 950ms">
+                <img
+                  class="tight-img"
+                  src="https://ik.imagekit.io/anisa15/white.png"
+                  alt=""
+                  draggable="false"
+                />
+                <span class="tight-label">Contacto</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ============ CONTENIDO (scroll por detrás del menú y del logo) ============ -->
+    <main
+      class="relative z-0 pt-[calc(var(--hh,0px)+10vw)] md:pt-[calc(var(--hh,0px)+5vw)]"
+      style="padding-bottom: calc(var(--fh, 0px) + 4svh)"
+    >
+      <h1 class="sr-only">Medias</h1>
+
+      <!-- Rejilla de productos: 2 columnas en móvil, 4 en escritorio -->
+      <section aria-label="Catálogo de medias">
+        <ul
+          class="mx-auto grid w-[88vw] grid-cols-2 gap-x-[4.7vw] gap-y-[6vw] md:w-[86vw] md:grid-cols-4 md:gap-x-[2.2vw] md:gap-y-[3vw]"
+        >
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[2/3] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/medias%20dalia/mediasgranateencaje.png"
+                  alt="Medias de encaje transparente color burdeos - Den 10-20"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/modeloencaje.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Medias de encaje transparente color burdeos - Den 10-20
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[2/3] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/medias%20dalia/mediasfucsias.png"
+                  alt="Medias fucsias"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/modelofucsia.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Medias de muslo semiopacas color fucsia - Den 30-40
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[2/3] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/medias%20dalia/mediasmarrones.png"
+                  alt="medias marrones"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/modelomarron.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Medias plumetti transparente marrón chocolate - Den 10-20
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[2/3] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/medias%20dalia/mediasazules.png"
+                  alt="Medias azul"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/modeloazules.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Medias semiopacas azul cobalto - Den 30-40
+              </p>
+            </a>
+          </li>
+
+<!-- Foto de colección -->
+<li class="col-span-full">
+    <figure>
+      <img
+        class="block aspect-[4/3] w-full bg-neutral-200 object-cover md:aspect-[16/9]"
+        src="https://ik.imagekit.io/k7xdtotaj/coleccionmedias2.png"
+        alt="modelo medias azules"
+      />
+      <figcaption
+        class="mt-[3vw] flex justify-between text-[2.8vw] leading-[1.3] md:mt-[1.2vw] md:text-[clamp(11px,0.95vw,15px)]"
+      >
+      <span>Nueva Colección</span>
+      <span>Otoño Invierno 2026</span>
+      </figcaption>
+    </figure>
+  </li>
+          
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[2/3] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/medias%20dalia/mediasturquesas.png"
+                  alt="Medias turquesa transparentes"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/modeloturquesa.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Medias de muslo transparentes color turquesa - Den 10-20
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[2/3] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/medias%20dalia/mediarojas.png"
+                  alt="Medias rojas"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/modelorojo.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Medias transparentes color rojo - Den 10-20
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[2/3] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/medias%20dalia/mediasblancoponto.png"
+                  alt="Calcetines crema con lunares"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/modelocalcetines.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Calcetines opacos color crema con lunares negros - Den 50+
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[2/3] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/medias%20dalia/mediasrosa.png"
+                  alt="Medias rosas transparentes"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/modelorosas.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Medias transparentes color rosa empolvado - Den 10-20
+              </p>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Foto de colección -->
+      <section aria-label="Nueva colección">
+        <figure class="mx-auto mt-[6vw] w-[88vw] md:mt-[3vw] md:w-[86vw]">
+          <img
+            class="block aspect-[4/3] w-full bg-neutral-200 object-cover md:aspect-[16/9]"
+            src="https://ik.imagekit.io/k7xdtotaj/coleccionmedias.png"
+            alt="coleccion"
+          />
+          <figcaption
+            class="mt-[3vw] flex justify-between text-[2.8vw] leading-[1.3] md:mt-[1.2vw] md:text-[clamp(11px,0.95vw,15px)]"
+          >
+            <span>Medias de muslo </span>
+            <span>Mercería DALIA</span>
+          </figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <!-- ============ LOGO ============
+       Móvil: fijo abajo, negro. Escritorio: arriba (estado final del landing),
+       blanco con mix-blend-mode: exclusion. -->
+    <div
+      id="site-logo"
+      class="pointer-events-none fixed inset-x-0 bottom-0 z-30 px-3 pb-3 md:bottom-auto md:top-[4svh] md:p-0 md:mix-blend-exclusion"
+    >
+      <a
+        href="index.html"
+        aria-label="Dalia, inicio"
+        class="pointer-events-auto block md:mx-auto md:w-fit"
+      >
+        <img
+          src="https://ik.imagekit.io/anisa15/DALIA.png"
+          alt="Dalia"
+          draggable="false"
+          class="block h-auto max-h-[22svh] w-full object-contain object-bottom md:max-h-none md:w-[clamp(180px,16vw,340px)] md:brightness-0 md:invert"
+        />
+      </a>
+    </div>
+
+    <script>
+      // Mide menú y logo para dejar el contenido justo debajo de las medias
+      const root = document.documentElement;
+      const header = document.getElementById("site-header");
+      const logo = document.getElementById("site-logo");
+      const mqDesk = matchMedia("(min-width: 768px)");
+
+      function measure() {
+        // la media de la página actual siempre está bajada (76% de la altura)
+        root.style.setProperty("--hh", header.offsetHeight * 0.76 + "px");
+        root.style.setProperty(
+          "--fh",
+          mqDesk.matches ? "0px" : logo.offsetHeight + "px",
+        );
+      }
+      measure();
+      addEventListener("resize", measure);
+      mqDesk.addEventListener("change", measure);
+      new ResizeObserver(measure).observe(header);
+      new ResizeObserver(measure).observe(logo);
+    </script>
+  </body>
+</html>
