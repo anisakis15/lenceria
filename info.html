@@ -11,7 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide-core.min.css"
+    />
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <script>
       tailwind.config = {
@@ -51,11 +54,15 @@
         margin-top: calc(var(--hh, 0px) - var(--fh, 0px));
       } /* centra el bloque entre menú y logo */
 
+      :root {
+        --m: 0.73;
+      } /* factor de reducción en móvil: 1 = tamaño actual */
+
       .ill {
         display: block;
         height: auto;
-        width: calc(var(--k) * 1vw);
-      } /* ilustración: --k = ancho en vw */
+        width: calc(var(--k) * var(--m) * 1vw);
+      }
       @media (min-width: 768px) {
         .ill {
           width: clamp(
@@ -93,11 +100,10 @@
           font-size: clamp(12px, 1vw, 15px);
         }
         .ttl {
-          font-size: clamp(30px, 3.2vw, 56px);
+          font-size: clamp(30px, 2.4vw, 56px);
         }
         .txt {
           margin-top: 3rem;
-          font-size: clamp(15px, 1.5vw, 24px);
         }
       }
 
@@ -130,7 +136,7 @@
         list-style: none;
         cursor: pointer;
         font-family: "Adelon", Georgia, serif;
-        font-size: 5vw;
+        font-size: 4vw;
       }
       details summary::-webkit-details-marker {
         display: none;
@@ -147,7 +153,7 @@
       }
       @media (min-width: 768px) {
         details summary {
-          font-size: clamp(18px, 1.6vw, 26px);
+          font-size: clamp(18px, 1.5vw, 26px);
         }
       }
 
@@ -306,6 +312,8 @@
           <img
             class="ill"
             style="--k: 22"
+            ;
+            --km:16
             src="https://ik.imagekit.io/anisa15/feet1.svg"
             alt="Ilustración de dos piernas con calcetines"
           />
@@ -320,14 +328,40 @@
         </div>
       </section>
 
-      <!-- FOTO 1 -->
+      <!-- SLIDESHOW 1 (piernas) -->
       <section class="flex min-h-[60svh] items-center justify-center">
         <div class="blk">
-          <img
-            class="block aspect-[16/9] w-[var(--cw)] object-cover"
-            alt="Cuatro piernas con medias de colores"
-            src="https://ik.imagekit.io/anisa15/magnific__i-would-like-an-image-of-4-individual-legs-one-nex__27330.png"
-          />
+          <div
+            id="slideshow-1"
+            class="splide w-[var(--cw)]"
+            aria-label="Fotos de Dalia"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[16/9] w-full object-cover"
+                    alt="Medias desde distintos ángulos"
+                    src="https://ik.imagekit.io/anisa15/magnific__make-an-editorial-image-with-a-fit-camera-flash-ae__59541.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[16/9] w-full object-cover"
+                    alt="Cuatro piernas con medias de colores"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__76891.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[16/9] w-full object-cover"
+                    alt="Detalle de medias"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__76885.png"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -358,14 +392,40 @@
         </div>
       </section>
 
-      <!-- FOTO 2 -->
+      <!-- SLIDESHOW 2 (sujetadores) -->
       <section class="flex min-h-[60svh] items-center justify-center">
         <div class="blk">
-          <img
-            class="block aspect-[4/3] w-[var(--cw)] object-cover md:aspect-[16/9]"
-            alt="Sujetador vintage azul con encaje"
-            src="https://ik.imagekit.io/anisa15/magnific__en-el-estilo-fotografico-de-img1-crea-una-conjunto__23914.png"
-          />
+          <div
+            id="slideshow-2"
+            class="splide w-[var(--cw)]"
+            aria-label="Sujetadores vintage"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Sujetador vintage azul con encaje"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__35151.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Sujetador vintage azul con encaje"
+                    src="https://ik.imagekit.io/anisa15/magnific__img1-make-the-background-adapt-to-169-and-make-the__34309.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Sujetador vintage azul con encaje"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__35152.png"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -418,14 +478,39 @@
         </div>
       </section>
 
-      <!-- FOTO 3 -->
       <section class="flex min-h-[60svh] items-center justify-center">
         <div class="blk">
-          <img
-            class="block aspect-[4/3] w-[var(--cw)] object-cover md:aspect-[16/9]"
-            alt="Medias rosas transparentes con calcetín blanco y zapato negro"
-            src="https://ik.imagekit.io/anisa15/shoe.png"
-          />
+          <div
+            id="slideshow-3"
+            class="splide w-[var(--cw)]"
+            aria-label="Medias"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Medias rosas transparentes con calcetín blanco y zapato negro"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__76886.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Medias rosas transparentes con calcetín blanco y zapato negro"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__76887.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Medias rosas transparentes con calcetín blanco y zapato negro"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__59542.png"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -518,7 +603,23 @@
         />
       </a>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script>
+      const base = {
+        type: "fade",
+        rewind: true,
+        arrows: false,
+        pagination: false,
+        drag: false,
+        autoplay: true,
+        pauseOnHover: false,
+        pauseOnFocus: false,
+        speed: 800, // antes 1200
+      };
+      new Splide("#slideshow-1", { ...base, interval: 2000 }).mount(); // antes 3500
+      new Splide("#slideshow-2", { ...base, interval: 2000 }).mount(); // antes 4600
+      new Splide("#slideshow-3", { ...base, interval: 2000 }).mount(); // antes 5300
+    </script>
     <script>
       // Mide menú y logo para centrar cada bloque entre ambos
       const root = document.documentElement;
