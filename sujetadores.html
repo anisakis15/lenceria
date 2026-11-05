@@ -76,20 +76,14 @@
           transform: translateY(-24%);
         }
       }
-      /* Táctil: empiezan todas abajo (como al salir del index) y se recogen
-   las que no son la página actual */
+      /* Táctil: según el wireframe, solo cae la media de la página actual */
       @media not all and (hover: hover) and (pointer: fine) {
         .tight-in {
+          transform: translateY(-48%);
+        }
+        .tight-link[aria-current="page"] .tight-in {
           animation: drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
           animation-delay: var(--d);
-        }
-        body.menu-sub .tight-in {
-          animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-          animation-delay: calc(var(--d) - 350ms);
-        }
-        body.menu-sub .tight-link[aria-current] .tight-in {
-          animation: none;
-          transform: translateY(-24%);
         }
       }
       @keyframes drop {
@@ -100,27 +94,19 @@
           transform: translateY(-24%);
         }
       }
-      @keyframes rise {
-        from {
-          transform: translateY(-24%);
-        }
-        to {
-          transform: translateY(-48%);
-        }
-      }
       @media (prefers-reduced-motion: reduce) {
-        body.menu-sub .tight-in {
-          animation: none;
-          transform: translateY(-48%);
+        .tight-in {
+          animation: none !important;
+          transition: none;
         }
-        body.menu-sub .tight-link[aria-current] .tight-in {
+        .tight-link[aria-current="page"] .tight-in {
           transform: translateY(-24%);
         }
       }
     </style>
   </head>
 
-  <body class="menu-sub overflow-x-hidden bg-white font-mono text-black">
+  <body class="overflow-x-hidden bg-white font-mono text-black">
     <!-- ============ MENÚ FIJO (por encima del contenido) ============ -->
     <header
       id="site-header"
@@ -211,48 +197,128 @@
         >
           <li>
             <a href="#" class="group block outline-none">
-              <img
-                class="block aspect-[2/3] w-full bg-neutral-200 object-cover transition-opacity duration-300 group-hover:opacity-85 group-focus-visible:opacity-85"
-                src="img/sujetadores/melocoton.jpg"
-                alt="Sujetador azul claro con encaje color melocotón"
-              />
+              <div class="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/azulycrema.png"
+                  alt="Sujetador azul claro con encaje color melocotón"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/maniquiazulymelocoton.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
               <p
                 class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
               >
-                Sujetador Azul con Encaje
+                Sujetador azul con encaje melocotón
               </p>
             </a>
           </li>
           <li>
             <a href="#" class="group block outline-none">
-              <img
-                class="block aspect-[2/3] w-full bg-neutral-200 object-cover transition-opacity duration-300 group-hover:opacity-85 group-focus-visible:opacity-85"
-                src="img/sujetadores/crema.jpg"
-                alt="Sujetador azul y crema con volantes"
-              />
+              <div class="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/beigeflores.png"
+                  alt="Sujetador crema con florecitas"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/maniquisujebeis.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
               <p
                 class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
               >
-                Sujetador Azul y Crema
+                Sujetador pointelle con estampado floral
               </p>
             </a>
           </li>
           <li>
             <a href="#" class="group block outline-none">
-              <img
-                class="block aspect-[2/3] w-full bg-neutral-200 object-cover transition-opacity duration-300 group-hover:opacity-85 group-focus-visible:opacity-85"
-                src="img/sujetadores/encaje.jpg"
-                alt="Sujetador negro con encaje"
-              />
+              <div class="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/negroencaje.png"
+                  alt="Sujetador negro encaje"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/maniquinegro.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
               <p
                 class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
               >
-                Sujetador Negro con Encaje
+                Sujetador negro satinado con encaje
               </p>
             </a>
           </li>
           <li>
             <a href="#" class="group block outline-none">
+              <div class="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/encajetransparente.png"
+                  alt="Sujetador encaje rosa transparente"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/maniquisujeencaje.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Sujetador de encaje rosa transparente
+              </p>
+            </a>
+          </li>
+<!-- Foto de colección -->
+          <li class="col-span-full">
+            <figure>
+              <img
+                class="block aspect-[4/3] w-full bg-neutral-200 object-cover md:aspect-[16/9]"
+                src="https://ik.imagekit.io/k7xdtotaj/magnific__add-a-translucent-sheet-of-paper-with-img4-printed__63385.png"
+                alt="Descripción de la imagen"
+              />
+              <figcaption
+                class="mt-[3vw] flex justify-between text-[2.8vw] leading-[1.3] md:mt-[1.2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+              <span>Nueva Colección</span>
+              <span>Otoño Invierno 2026</span>
+              </figcaption>
+            </figure>
+          </li>
+
+          <li>
+            <a href="#" class="group block outline-none">
+              <div class="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/azulnarino.png"
+                  alt="Sujetador azul bordado"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/maniquiterciopelo.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Sujetador terciopelo azul con bordados
               <img
                 class="block aspect-[2/3] w-full bg-neutral-200 object-cover transition-opacity duration-300 group-hover:opacity-85 group-focus-visible:opacity-85"
                 src="img/sujetadores/flores.jpg"
@@ -281,6 +347,23 @@
           </li>
           <li>
             <a href="#" class="group block outline-none">
+              <div class="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/rosaencaje.png"
+                  alt="Sujetador rosa encaje blanco"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/maniquisujerosa.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Sujetador rosa satinado con encaje blanco
               <img
                 class="block aspect-[2/3] w-full bg-neutral-200 object-cover transition-opacity duration-300 group-hover:opacity-85 group-focus-visible:opacity-85"
                 src="img/sujetadores/crema.jpg"
@@ -295,6 +378,23 @@
           </li>
           <li>
             <a href="#" class="group block outline-none">
+              <div class="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/limaynegro.png"
+                  alt="Sujetador lima y negro"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/maniquisujeverde.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Sujetador lima satiando con ribete negro
               <img
                 class="block aspect-[2/3] w-full bg-neutral-200 object-cover transition-opacity duration-300 group-hover:opacity-85 group-focus-visible:opacity-85"
                 src="img/sujetadores/encaje.jpg"
@@ -309,6 +409,23 @@
           </li>
           <li>
             <a href="#" class="group block outline-none">
+              <div class="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200">
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="https://ik.imagekit.io/k7xdtotaj/azulencaje.png"
+                  alt="Sujetador azul con volantes"
+                />
+                <img
+                  class="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  src="https://ik.imagekit.io/k7xdtotaj/maniquiazulencaje.png"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p
+                class="mt-[3vw] text-[2.8vw] leading-[1.3] group-hover:underline group-focus-visible:underline md:mt-[2vw] md:text-[clamp(11px,0.95vw,15px)]"
+              >
+                Sujetador azul con volantes de encaje beige
               <img
                 class="block aspect-[2/3] w-full bg-neutral-200 object-cover transition-opacity duration-300 group-hover:opacity-85 group-focus-visible:opacity-85"
                 src="img/sujetadores/flores.jpg"
@@ -329,12 +446,15 @@
         <figure class="mx-auto mt-[6vw] w-[88vw] md:mt-[3vw] md:w-[86vw]">
           <img
             class="block aspect-[4/3] w-full bg-neutral-200 object-cover md:aspect-[16/9]"
+            src="https://ik.imagekit.io/k7xdtotaj/MANIQUISJUNTOS.png"
             src="https://ik.imagekit.io/anisa15/shoe.png"
             alt="Medias rosas transparentes con calcetín blanco y zapato negro"
           />
           <figcaption
             class="mt-[3vw] flex justify-between text-[2.8vw] leading-[1.3] md:mt-[1.2vw] md:text-[clamp(11px,0.95vw,15px)]"
           >
+            <span>Colección 1996</span>
+            <span>Mercería DALIA</span>
             <span>New Collection</span>
             <span>Autumn Winter 2026</span>
           </figcaption>
