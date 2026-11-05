@@ -40,9 +40,6 @@
       } catch (e) {}
     </script>
     <style>
-      /* Si tienes los archivos de Adelon, descomenta y ajusta la ruta
-    @font-face { font-family: "Adelon"; src: url("/fonts/Adelon.woff2") format("woff2"); font-display: swap; }
-    */
       html {
         background: #fff;
       }
@@ -153,7 +150,7 @@
         width: 17vw;
         height: auto;
         pointer-events: none;
-      } /* antes 22vw */
+      }
       .ft-tl {
         top: var(--ft-pt);
         left: 6vw;
@@ -213,7 +210,7 @@
         line-height: 1.6;
       }
 
-      /* Botón claro/oscuro (la braga) */
+      /* Botón claro/oscuro */
       .ft-toggle {
         grid-column: 1 / -1;
         justify-self: center;
@@ -543,7 +540,7 @@
           </p>
         </div>
       </section>
-      <!-- 4. Slideshow B (igual que A de momento) -->
+      <!-- 4. Slideshow B -->
       <section class="flex min-h-svh items-center justify-center">
         <div class="blk">
           <div
@@ -687,7 +684,7 @@
     <!-- ============ SCRIPTS ============ -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script>
-      // Slideshows independientes (cada uno con su ritmo), sin flechas ni puntos
+      // Slideshows independientes, sin flechas ni puntos
       const base = {
         type: "fade",
         rewind: true,

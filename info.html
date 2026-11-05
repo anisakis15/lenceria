@@ -39,14 +39,11 @@
       } catch (e) {}
     </script>
     <style>
-      /* Si tienes los archivos de Adelon, descomenta y ajusta la ruta
-    @font-face { font-family: "Adelon"; src: url("/fonts/Adelon.woff2") format("woff2"); font-display: swap; }
-    */
       html {
         background: #fff;
       }
 
-      /* ---------- ANCHO DE COLUMNA (igual que el landing) ---------- */
+      /* ---------- ANCHO DE COLUMNA  ---------- */
       :root {
         --cw: 86vw;
         --fs: 2.8vw;
@@ -58,7 +55,7 @@
         }
       }
 
-      /* ---------- CONTENIDO (mismos valores que el landing) ---------- */
+      /* ---------- CONTENIDO ---------- */
       .blk {
         margin-top: calc(var(--hh, 0px) - var(--fh, 0px));
       } /* centra el bloque entre menú y logo */
@@ -297,7 +294,7 @@
         width: 17vw;
         height: auto;
         pointer-events: none;
-      } /* antes 22vw */
+      }
       .ft-tl {
         top: var(--ft-pt);
         left: 6vw;
@@ -357,7 +354,7 @@
         line-height: 1.6;
       }
 
-      /* Botón claro/oscuro (la braga) */
+      /* Botón claro/oscuro */
       .ft-toggle {
         grid-column: 1 / -1;
         justify-self: center;
