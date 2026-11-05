@@ -180,12 +180,22 @@
       .tight-link:focus-visible .tight-label {
         text-decoration: underline;
       }
+      /* El enlace no captura el ratón: solo la media y su etiqueta */
+      a.tight-link {
+        pointer-events: none;
+      }
+      .tight-img,
+      .tight-label {
+        pointer-events: auto;
+      }
       @media (min-width: 768px) {
         .tight-img {
           height: min(33vw, 44svh);
         }
         .tight-label {
           font-size: clamp(13px, 1.1vw, 18px);
+          line-height: 1;
+          white-space: nowrap;
         }
       }
       @media (hover: hover) and (pointer: fine) {
@@ -198,10 +208,22 @@
           transform: translateY(-24%);
         }
       }
+      /* Táctil */
       @media not all and (hover: hover) and (pointer: fine) {
+        /* Index: caen todas al cargar */
         .tight-in {
           animation: drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
           animation-delay: var(--d);
+        }
+
+        /* Subpáginas: empiezan todas abajo y se recogen las que no son la actual */
+        body.menu-sub .tight-in {
+          animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation-delay: calc(var(--d) - 300ms);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          animation: none;
+          transform: translateY(-24%);
         }
       }
       @keyframes drop {
@@ -212,10 +234,21 @@
           transform: translateY(-24%);
         }
       }
+      @keyframes rise {
+        from {
+          transform: translateY(-24%);
+        }
+        to {
+          transform: translateY(-48%);
+        }
+      }
       @media (prefers-reduced-motion: reduce) {
-        .tight-in {
+        body.menu-sub .tight-in {
           animation: none;
-          transition: none;
+          transform: translateY(-48%);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          transform: translateY(-24%);
         }
       }
     </style>
