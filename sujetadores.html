@@ -76,14 +76,20 @@
           transform: translateY(-24%);
         }
       }
-      /* Táctil: según el wireframe, solo cae la media de la página actual */
+      /* Táctil: empiezan todas abajo (como al salir del index) y se recogen
+   las que no son la página actual */
       @media not all and (hover: hover) and (pointer: fine) {
         .tight-in {
-          transform: translateY(-48%);
-        }
-        .tight-link[aria-current="page"] .tight-in {
           animation: drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
           animation-delay: var(--d);
+        }
+        body.menu-sub .tight-in {
+          animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation-delay: calc(var(--d) - 350ms);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          animation: none;
+          transform: translateY(-24%);
         }
       }
       @keyframes drop {
@@ -94,19 +100,27 @@
           transform: translateY(-24%);
         }
       }
-      @media (prefers-reduced-motion: reduce) {
-        .tight-in {
-          animation: none !important;
-          transition: none;
+      @keyframes rise {
+        from {
+          transform: translateY(-24%);
         }
-        .tight-link[aria-current="page"] .tight-in {
+        to {
+          transform: translateY(-48%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        body.menu-sub .tight-in {
+          animation: none;
+          transform: translateY(-48%);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
           transform: translateY(-24%);
         }
       }
     </style>
   </head>
 
-  <body class="overflow-x-hidden bg-white font-mono text-black">
+  <body class="menu-sub overflow-x-hidden bg-white font-mono text-black">
     <!-- ============ MENÚ FIJO (por encima del contenido) ============ -->
     <header
       id="site-header"

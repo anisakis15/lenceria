@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Info · Dalia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide-core.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              menu: ['"Adelon"', "Georgia", "serif"], // menú y títulos
+              mono: ['"Geist Mono"', "ui-monospace", "monospace"], // textos
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Si tienes los archivos de Adelon, descomenta y ajusta la ruta
+    @font-face { font-family: "Adelon"; src: url("/fonts/Adelon.woff2") format("woff2"); font-display: swap; }
+    */
+      html {
+        background: #fff;
+      }
+
+      /* ---------- ANCHO DE COLUMNA (igual que el landing) ---------- */
+      :root {
+        --cw: 86vw;
+        --fs: 2.4vw;
+      }
+      @media (min-width: 768px) {
+        :root {
+          --cw: min(56vw, calc((100svh - var(--hh, 0px) - 6rem) * 1.7778));
+          --fs: clamp(15px, 1vw, 24px); /* igual que el landing */
+        }
+      }
+
+      /* ---------- CONTENIDO (mismos valores que el landing) ---------- */
+      .blk {
+        margin-top: calc(var(--hh, 0px) - var(--fh, 0px));
+      } /* centra el bloque entre menú y logo */
+
+      :root {
+        --m: 0.73;
+      } /* factor de reducción en móvil: 1 = tamaño actual */
+
+      .ill {
+        display: block;
+        height: auto;
+        width: calc(var(--k) * var(--m) * 1vw);
+      }
+      @media (min-width: 768px) {
+        .ill {
+          width: clamp(
+            calc(var(--k) * 3.3px),
+            calc(var(--k) * 0.33vw),
+            calc(var(--k) * 5.8px)
+          );
+        }
+      }
+
+      .num {
+        margin-top: 6vw;
+        font-size: 3.2vw;
+      }
+      .ttl {
+        margin-top: 1.5svh;
+        font-family: "Adelon", Georgia, serif;
+        font-size: 7.5vw;
+        line-height: 1;
+      }
+      .txt {
+        margin-top: 6vw;
+        width: var(--cw);
+        text-align: justify;
+        text-align-last: justify;
+        font-size: var(--fs);
+        line-height: 1.3;
+      }
+      .txt + .txt {
+        margin-top: 1.3em;
+      }
+      @media (min-width: 768px) {
+        .num {
+          margin-top: 3rem;
+          font-size: clamp(12px, 1vw, 15px);
+        }
+        .ttl {
+          font-size: clamp(30px, 2.4vw, 56px);
+        }
+        .txt {
+          margin-top: 3rem;
+        }
+      }
+
+      /* ---------- TABLA ---------- */
+      .tbl {
+        margin-top: 6vw;
+        width: var(--cw);
+        font-size: var(--fs);
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+      }
+      .tbl thead tr {
+        border-bottom: 1px solid #000;
+      }
+      .tbl th {
+        padding: 1.6svh 0;
+        font-weight: 400;
+      }
+      .tbl td {
+        padding: 1.4svh 0;
+      }
+      @media (min-width: 768px) {
+        .tbl {
+          margin-top: 3rem;
+        }
+      }
+
+      /* ---------- FAQ ---------- */
+      details summary {
+        list-style: none;
+        cursor: pointer;
+        font-family: "Adelon", Georgia, serif;
+        font-size: 5vw;
+      }
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+      details summary::after {
+        content: " +";
+        font-family: "Geist Mono", monospace;
+      }
+      details[open] summary::after {
+        content: " –";
+      }
+      details .txt {
+        margin-top: 2svh;
+      }
+      @media (min-width: 768px) {
+        details summary {
+          font-size: clamp(18px, 1.6vw, 26px);
+        }
+      }
+
+      /* ---------- MENÚ ---------- */
+      .tight-in {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .tight-img {
+        display: block;
+        height: min(57vw, 34svh);
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+      }
+      .tight-label {
+        margin-top: 1.5svh;
+        font-size: 3.2vw;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .tight-link:focus-visible .tight-label {
+        text-decoration: underline;
+      }
+
+      /* El enlace no captura el ratón: solo la media y su etiqueta */
+      a.tight-link {
+        pointer-events: none;
+      }
+      .tight-img,
+      .tight-label {
+        pointer-events: auto;
+      }
+      @media (min-width: 768px) {
+        .tight-img {
+          height: min(33vw, 44svh);
+        }
+        .tight-label {
+          padding-top: 1.5svh; /* antes: margin-top */
+          font-size: 3.2vw;
+          line-height: 1;
+          white-space: nowrap;
+        }
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .tight-in {
+          transform: translateY(-48%);
+        }
+        .tight-link:hover .tight-in,
+        .tight-link:focus-visible .tight-in,
+        .tight-link[aria-current="page"] .tight-in {
+          transform: translateY(-24%);
+        }
+      }
+      /* Táctil */
+      @media not all and (hover: hover) and (pointer: fine) {
+        /* Index: caen todas al cargar */
+        .tight-in {
+          animation: drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation-delay: var(--d);
+        }
+
+        /* Subpáginas: empiezan todas abajo y se recogen las que no son la actual */
+        body.menu-sub .tight-in {
+          animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation-delay: calc(var(--d) - 300ms);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          animation: none;
+          transform: translateY(-24%);
+        }
+      }
+      @keyframes drop {
+        from {
+          transform: translateY(-48%);
+        }
+        to {
+          transform: translateY(-24%);
+        }
+      }
+      @keyframes rise {
+        from {
+          transform: translateY(-24%);
+        }
+        to {
+          transform: translateY(-48%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        body.menu-sub .tight-in {
+          animation: none;
+          transform: translateY(-48%);
+        }
+        body.menu-sub .tight-link[aria-current] .tight-in {
+          transform: translateY(-24%);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="menu-sub overflow-x-hidden bg-white font-mono text-black">
+    <!-- ============ MENÚ FIJO ============ -->
+    <header
+      id="site-header"
+      class="pointer-events-none fixed inset-x-0 top-0 z-20 font-menu"
+    >
+      <nav aria-label="Menú principal">
+        <ul class="grid grid-cols-4">
+          <li>
+            <a
+              href="info.html"
+              aria-current="page"
+              class="tight-link pointer-events-auto block overflow-hidden outline-none"
+            >
+              <div class="tight-in" style="--d: 500ms">
+                <img
+                  class="tight-img"
+                  src="https://ik.imagekit.io/anisa15/black.png"
+                  alt=""
+                  draggable="false"
+                />
+                <span class="tight-label">Info</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="medias.html"
+              class="tight-link pointer-events-auto block overflow-hidden outline-none"
+            >
+              <div class="tight-in" style="--d: 650ms">
+                <img
+                  class="tight-img"
+                  src="https://ik.imagekit.io/anisa15/blue_Px9BT2qnz.png"
+                  alt=""
+                  draggable="false"
+                />
+                <span class="tight-label">Medias</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="sujetadores.html"
+              class="tight-link pointer-events-auto block overflow-hidden outline-none"
+            >
+              <div class="tight-in" style="--d: 800ms">
+                <img
+                  class="tight-img"
+                  src="https://ik.imagekit.io/anisa15/two.png"
+                  alt=""
+                  draggable="false"
+                />
+                <span class="tight-label">Sujetadores</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="contacto.html"
+              class="tight-link pointer-events-auto block overflow-hidden outline-none"
+            >
+              <div class="tight-in" style="--d: 950ms">
+                <img
+                  class="tight-img"
+                  src="https://ik.imagekit.io/anisa15/white.png"
+                  alt=""
+                  draggable="false"
+                />
+                <span class="tight-label">Contacto</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ============ CONTENIDO (scroll por detrás) ============ -->
+    <main
+      class="relative z-0 text-center"
+      style="padding-bottom: calc(var(--fh, 0px) + 4svh)"
+    >
+      <!-- 01 QUIÉNES SOMOS -->
+      <section
+        class="flex min-h-svh items-center justify-center"
+        aria-labelledby="t1"
+      >
+        <div class="blk flex flex-col items-center">
+          <img
+            class="ill"
+            style="--k: 22"
+            ;
+            --km:16
+            src="https://ik.imagekit.io/anisa15/feet1.svg"
+            alt="Ilustración de dos piernas con calcetines"
+          />
+          <p class="num">01</p>
+          <h1 id="t1" class="ttl">Quiénes somos</h1>
+          <p class="txt">
+            Dalia es una tienda pequeña en el barrio de San Blas, en Madrid,
+            llena de medias de colores y sujetadores vintage. Creemos que lo que
+            llevas debajo también merece buen gusto, y que elegirlo debería ser
+            fácil y divertido, sin tallas imposibles ni prisas.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDESHOW 1 (piernas) -->
+      <section class="flex min-h-[60svh] items-center justify-center">
+        <div class="blk">
+          <div
+            id="slideshow-1"
+            class="splide w-[var(--cw)]"
+            aria-label="Fotos de Dalia"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[16/9] w-full object-cover"
+                    alt="Medias desde distintos ángulos"
+                    src="https://ik.imagekit.io/anisa15/magnific__make-an-editorial-image-with-a-fit-camera-flash-ae__59541.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[16/9] w-full object-cover"
+                    alt="Cuatro piernas con medias de colores"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__76891.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[16/9] w-full object-cover"
+                    alt="Detalle de medias"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__76885.png"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 SUJETADORES VINTAGE -->
+      <section
+        class="flex min-h-svh items-center justify-center"
+        aria-labelledby="t2"
+      >
+        <div class="blk flex flex-col items-center">
+          <img
+            class="ill"
+            style="--k: 55"
+            src="https://ik.imagekit.io/anisa15/bra2.svg"
+            alt="Ilustración de un sujetador"
+          />
+          <p class="num">02</p>
+          <h2 id="t2" class="ttl">Sujetadores vintage</h2>
+          <p class="txt">
+            Seleccionamos nuestros sujetadores uno a uno. Son piezas vintage,
+            así que cada una es única y, cuando algo te guste, lo mejor es no
+            pensárselo mucho.
+          </p>
+          <p class="txt">
+            Las tallas de antes no siempre coinciden con las de ahora. Por eso
+            no hace falta que sepas tu medida: pásate por la tienda y te
+            ayudamos a encontrar tu talla con calma.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDESHOW 2 (sujetadores) -->
+      <section class="flex min-h-[60svh] items-center justify-center">
+        <div class="blk">
+          <div
+            id="slideshow-2"
+            class="splide w-[var(--cw)]"
+            aria-label="Sujetadores vintage"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Sujetador vintage azul con encaje"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__35151.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Sujetador vintage azul con encaje"
+                    src="https://ik.imagekit.io/anisa15/magnific__img1-make-the-background-adapt-to-169-and-make-the__34309.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Sujetador vintage azul con encaje"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__35152.png"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 GUÍA DE MEDIAS (den) -->
+      <section
+        class="flex min-h-svh items-center justify-center"
+        aria-labelledby="t3"
+      >
+        <div class="blk flex flex-col items-center">
+          <img
+            class="ill"
+            style="--k: 40"
+            src="https://ik.imagekit.io/anisa15/measuring%20tape.svg"
+            alt="Ilustración de una cinta métrica"
+          />
+          <p class="num">03</p>
+          <h2 id="t3" class="ttl">Guía de medias</h2>
+
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th scope="col">Den</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Ideal para</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>10–20</td>
+                <td>Transparentes</td>
+                <td>Verano</td>
+              </tr>
+              <tr>
+                <td>30–40</td>
+                <td>Semiopacas</td>
+                <td>Entretiempo</td>
+              </tr>
+              <tr>
+                <td>50+</td>
+                <td>Opacas</td>
+                <td>Invierno</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="txt">
+            Los den miden el grosor del hilo: cuanto más alto es el número, más
+            opaca y más abrigada es la media. Si dudas, pregúntanos en tienda.
+          </p>
+        </div>
+      </section>
+
+      <!-- FOTO 3 -->
+      <section class="flex min-h-[60svh] items-center justify-center">
+        <div class="blk">
+          <div
+            id="slideshow-3"
+            class="splide w-[var(--cw)]"
+            aria-label="Medias"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Medias rosas transparentes con calcetín blanco y zapato negro"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__76886.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Medias rosas transparentes con calcetín blanco y zapato negro"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__76887.png"
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    class="block aspect-[4/3] w-full object-cover md:aspect-[16/9]"
+                    alt="Medias rosas transparentes con calcetín blanco y zapato negro"
+                    src="https://ik.imagekit.io/anisa15/magnific__i-would-like-a-picture-like-this-with-a-cinematic-__59542.png"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 CUIDADOS -->
+      <section
+        class="flex min-h-svh items-center justify-center"
+        aria-labelledby="t4"
+      >
+        <div class="blk flex flex-col items-center">
+          <img
+            class="ill"
+            style="--k: 38"
+            src="https://ik.imagekit.io/anisa15/cuidado.svg"
+            alt="Ilustración de una lavadora"
+          />
+          <p class="num">04</p>
+          <h2 id="t4" class="ttl">Cuidados</h2>
+          <p class="txt">
+            <strong class="font-bold">Medias:</strong> lávalas a mano con agua
+            tibia y jabón suave, o en bolsa de malla a 30° en programa delicado.
+            No las retuerzas ni las metas en la secadora.
+          </p>
+          <p class="txt">
+            <strong class="font-bold">Sujetadores vintage:</strong> siempre a
+            mano, sin suavizante, y sécalos en horizontal y a la sombra.
+          </p>
+        </div>
+      </section>
+
+      <!-- 05 PREGUNTAS FRECUENTES -->
+      <section
+        class="flex min-h-svh items-center justify-center"
+        aria-labelledby="t5"
+      >
+        <div class="blk flex flex-col items-center">
+          <p class="num" style="margin-top: 0">05</p>
+          <h2 id="t5" class="ttl">Preguntas frecuentes</h2>
+
+          <div class="mt-[6vw] w-[var(--cw)] border-t border-black md:mt-12">
+            <details class="border-b border-black py-[2.2svh]">
+              <summary>¿Los sujetadores son de segunda mano?</summary>
+              <p class="txt">
+                Son vintage, seleccionados uno a uno por nosotras. Cada pieza es
+                única, así que no siempre repetimos talla ni modelo.
+              </p>
+            </details>
+            <details class="border-b border-black py-[2.2svh]">
+              <summary>¿Puedo probármelos antes de comprar?</summary>
+              <p class="txt">
+                Sí, en la tienda. Te ayudamos a elegir talla con calma, sin
+                prisas y sin compromiso de compra.
+              </p>
+            </details>
+            <details class="border-b border-black py-[2.2svh]">
+              <summary>¿Qué talla de medias elijo?</summary>
+              <p class="txt">
+                Pásate por la tienda y te ayudamos a encontrar tu talla. Para
+                elegir el grosor, mira la guía de den que tienes más arriba.
+              </p>
+            </details>
+            <details class="border-b border-black py-[2.2svh]">
+              <summary>¿Vendéis online?</summary>
+              <p class="txt">
+                Por ahora solo en nuestra tienda física del barrio de San Blas,
+                en Madrid. Te esperamos con las medias a mano.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ LOGO ============
+       Móvil: fijo abajo, negro. Escritorio: arriba (estado final del landing),
+       blanco con mix-blend-mode: exclusion. -->
+    <div
+      id="site-logo"
+      class="pointer-events-none fixed inset-x-0 bottom-0 z-30 px-3 pb-3 md:bottom-auto md:top-[4svh] md:p-0 md:mix-blend-exclusion"
+    >
+      <a
+        href="index.html"
+        aria-label="Dalia, inicio"
+        class="pointer-events-auto block md:mx-auto md:w-fit"
+      >
+        <img
+          src="https://ik.imagekit.io/anisa15/DALIA.png"
+          alt="Dalia"
+          draggable="false"
+          class="block h-auto max-h-[22svh] w-full object-contain object-bottom md:max-h-none md:w-[clamp(180px,16vw,340px)] md:brightness-0 md:invert"
+        />
+      </a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script>
+      const base = {
+        type: "fade",
+        rewind: true,
+        arrows: false,
+        pagination: false,
+        drag: false,
+        autoplay: true,
+        pauseOnHover: false,
+        pauseOnFocus: false,
+        speed: 800, // antes 1200
+      };
+      new Splide("#slideshow-1", { ...base, interval: 2000 }).mount(); // antes 3500
+      new Splide("#slideshow-2", { ...base, interval: 2000 }).mount(); // antes 4600
+      new Splide("#slideshow-3", { ...base, interval: 2000 }).mount(); // antes 5300
+    </script>
+    <script>
+      // Mide menú y logo para centrar cada bloque entre ambos
+      const root = document.documentElement;
+      const header = document.getElementById("site-header");
+      const logo = document.getElementById("site-logo");
+      const mqDesk = matchMedia("(min-width: 768px)");
+      const mqHover = matchMedia("(hover: hover) and (pointer: fine)");
+
+      function measure() {
+        root.style.setProperty(
+          "--hh",
+          header.offsetHeight * (mqHover.matches ? 0.52 : 1) + "px",
+        );
+        root.style.setProperty(
+          "--fh",
+          mqDesk.matches ? "0px" : logo.offsetHeight + "px",
+        );
+      }
+      measure();
+      addEventListener("resize", measure);
+      mqDesk.addEventListener("change", measure);
+      new ResizeObserver(measure).observe(header);
+      new ResizeObserver(measure).observe(logo);
+    </script>
+  </body>
+</html>
