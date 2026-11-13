@@ -625,66 +625,12 @@
       </a>
     </div>
 
-    <script>
-      // Mide menú y logo para dejar el contenido justo debajo de las medias
-      const root = document.documentElement;
-      const header = document.getElementById("site-header");
-      const logo = document.getElementById("site-logo");
-      const mqDesk = matchMedia("(min-width: 768px)");
-
-      function measure() {
-        // la media de la página actual siempre está bajada (76% de la altura)
-        root.style.setProperty("--hh", header.offsetHeight * 0.76 + "px");
-        root.style.setProperty(
-          "--fh",
-          mqDesk.matches ? "0px" : logo.offsetHeight + "px",
-        );
-      }
-      measure();
-      addEventListener("resize", measure);
-      mqDesk.addEventListener("change", measure);
-      new ResizeObserver(measure).observe(header);
-      new ResizeObserver(measure).observe(logo);
-    </script>
-    <script>
-      (() => {
-        const root = document.documentElement;
-        const header = document.getElementById("site-header");
-        const footer = document.getElementById("site-footer");
-
-        // Altura de referencia: hasta donde llegan las medias bajadas
-        const setTop = () =>
-          root.style.setProperty("--ft-top", header.offsetHeight * 0.76 + "px");
-        setTop();
-        addEventListener("resize", setTop);
-        new ResizeObserver(setTop).observe(header);
-
-        // Móvil: el logo sube cuando el footer ocupa el 35% inferior de la pantalla
-        new IntersectionObserver(
-          ([e]) =>
-            document.body.classList.toggle("footer-in", e.isIntersecting),
-          { rootMargin: "0px 0px -35% 0px" },
-        ).observe(footer);
-
-        // Botón claro/oscuro
-        const btn = document.getElementById("theme-toggle");
-        const sync = () => {
-          const dark = root.classList.contains("dark");
-          btn.setAttribute("aria-pressed", dark);
-          btn.querySelector('[data-mode="dark"]').classList.toggle("on", dark);
-          btn
-            .querySelector('[data-mode="light"]')
-            .classList.toggle("on", !dark);
-        };
-        btn.addEventListener("click", () => {
-          const dark = root.classList.toggle("dark");
-          try {
-            localStorage.setItem("theme", dark ? "dark" : "light");
-          } catch (e) {}
-          sync();
-        });
-        sync();
-      })();
-    </script>
+    <body
+      data-hh="0.76"
+      class="menu-sub overflow-x-hidden bg-fondo-claro font-texto text-texto-claro dark:bg-fondo-oscuro dark:text-texto-oscuro"
+    >
+      ...
+      <script src="js/main.js"></script>
+    </body>
   </body>
 </html>
